@@ -21,7 +21,7 @@ public class MainViewModel extends AndroidViewModel {
         this.REPOSITORY = new Repository();
     }
 
-    public MutableLiveData<DataIndonesiaResponse> getDataIndonesia() {
+    public MutableLiveData<List<DataIndonesiaResponse>> getDataIndonesia() {
         return this.REPOSITORY.getDataIndonesia();
     }
 

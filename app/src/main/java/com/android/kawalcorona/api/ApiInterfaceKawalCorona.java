@@ -10,8 +10,8 @@ import retrofit2.http.GET;
 
 public interface ApiInterfaceKawalCorona {
 
-    @GET("indonesia")
-    Call<DataIndonesiaResponse> getDataIndonesia();
+    @GET("indonesia/")
+    Call<List<DataIndonesiaResponse>> getDataIndonesia();
 
     @GET("indonesia/provinsi/")
     Call<List<DataProvinsiResponse>> getDataProvinsi();

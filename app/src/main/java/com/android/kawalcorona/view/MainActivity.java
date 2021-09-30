@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private MainViewModel viewModel;
     private final LifecycleOwner OWNER = this;
 
+    private static final String TAG = "MAIN ACTIVITY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,18 +41,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        viewModel.getDataIndonesia().observe(OWNER, new Observer<DataIndonesiaResponse>() {
+        viewModel.getDataIndonesia().observe(OWNER, new Observer<List<DataIndonesiaResponse>>() {
             @Override
-            public void onChanged(DataIndonesiaResponse dataIndonesiaResponse) {
-                if(dataIndonesiaResponse != null) {
-                    textMeninggal.setText(dataIndonesiaResponse.getMeninggal());
-                    textSembuh.setText(dataIndonesiaResponse.getSembuh());
-                    textPositif.setText(dataIndonesiaResponse.getPositif());
+            public void onChanged(List<DataIndonesiaResponse> dataIndonesiaResponses) {
+                if(dataIndonesiaResponses != null) {
+                    textMeninggal.setText(dataIndonesiaResponses.get(0).getMeninggal());
+                    textSembuh.setText(dataIndonesiaResponses.get(0).getSembuh());
+                    textPositif.setText(dataIndonesiaResponses.get(0).getPositif());
                 }
             }
         });
 
-        recyclerView.setHasFixedSize(true);
+                recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         viewModel.getDataProvinsi().observe(OWNER, new Observer<List<DataProvinsiResponse>>() {

@@ -24,18 +24,18 @@ public class Repository {
         this.apiInterfaceKawalCorona = ApiClient.getApiInterfaceKawalCorona();
     }
 
-    public MutableLiveData<DataIndonesiaResponse> getDataIndonesia() {
-        MutableLiveData<DataIndonesiaResponse> data = new MutableLiveData<>();
-        apiInterfaceKawalCorona.getDataIndonesia().enqueue(new Callback<DataIndonesiaResponse>() {
+    public MutableLiveData<List<DataIndonesiaResponse>> getDataIndonesia() {
+        MutableLiveData<List<DataIndonesiaResponse>> data = new MutableLiveData<>();
+        apiInterfaceKawalCorona.getDataIndonesia().enqueue(new Callback<List<DataIndonesiaResponse>>() {
             @Override
-            public void onResponse(Call<DataIndonesiaResponse> call, Response<DataIndonesiaResponse> response) {
+            public void onResponse(Call<List<DataIndonesiaResponse>> call, Response<List<DataIndonesiaResponse>> response) {
                 if (response.code() == 200) {
                     data.postValue(response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<DataIndonesiaResponse> call, Throwable t) {
+            public void onFailure(Call<List<DataIndonesiaResponse>> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
                 data.postValue(null);
             }
